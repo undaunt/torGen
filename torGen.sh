@@ -22,7 +22,7 @@
 
 # Variable list
 data="/torrents" # Torrent content parent folder
-torrents="~/docker/qbittorrent/torrents/" # .torrent file destination
+torrents="/home/data/" # .torrent file destination
 tracker1="${TRACKER_ID_1}"
 tracker2="${TRACKER_ID_2}"
 tracker3="${TRACKER_ID_3}"
