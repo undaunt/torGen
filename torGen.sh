@@ -22,19 +22,19 @@
 
 # Variable list
 # Hard coded locations for torrent data and torrent file output - set variables or modify
-data="${CREATED_TORRENT_ROOT}"
-torrents="${DOCKERDIR}/qbittorrent/torrents/"
-tracker1=""
-tracker2=""
+data="/torrents" # Torrent content parent folder
+torrents="~/docker/qbittorrent/torrents/" # .torrent file destination
+tracker1="RED"
+tracker2="MAM"
 tracker3=""
 tracker4=""
-tracker1_announce=""
-tracker2_announce=""
+tracker1_announce="https://flacsfor.me/xxxxx/announce"
+tracker2_announce="https://t.myanonamouse.net/tracker.php/xxxxx/announce"
 tracker3_announce=""
 tracker4_announce=""
 
 # Source tag array - add more if required
-sources=( "${TRACKER_ID_1}" "$tracker2" "${TRACKER_ID_3}" "${TRACKER_ID_4}" )
+sources=( "$tracker1" "$tracker2" "$tracker3" "$tracker4" )
 
 # Choose source flag and associated announce URL - set variables or modify, add/remove as needed
 echo
@@ -42,13 +42,13 @@ echo "Choose your tracker:"
 select source in "${sources[@]}"
 do
   case "$source" in
-    "${TRACKER_ID_1}") announce="${TRACKER_ANNOUNCE_1}"
+    "$tracker1") announce="tracker1_announce"
          ;;
-    "${TRACKER_ID_2}") announce="${TRACKER_ANNOUNCE_2}"
+    "$tracker2") announce="tracker2_announce"
          ;;
-    "${TRACKER_ID_3}") announce="${TRACKER_ANNOUNCE_3}"
+    "$tracker3") announce="tracker3_announce"
          ;;
-    "${TRACKER_ID_4}") announce="${TRACKER_ANNOUNCE_4}"
+    "$tracker4") announce="tracker4_announce"
          ;;
   esac
   break
