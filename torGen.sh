@@ -21,17 +21,16 @@
 # Released under the MIT License
 
 # Variable list
-# Hard coded locations for torrent data and torrent file output - set variables or modify
 data="/torrents" # Torrent content parent folder
 torrents="~/docker/qbittorrent/torrents/" # .torrent file destination
-tracker1="RED"
-tracker2="MAM"
-tracker3=""
-tracker4=""
-tracker1_announce="https://flacsfor.me/xxxxx/announce"
-tracker2_announce="https://t.myanonamouse.net/tracker.php/xxxxx/announce"
-tracker3_announce=""
-tracker4_announce=""
+tracker1="${TRACKER_ID_1}"
+tracker2="${TRACKER_ID_2}"
+tracker3="${TRACKER_ID_3}"
+tracker4="${TRACKER_ID_4}"
+tracker1_announce="${TRACKER_ANNOUNCE_1}"
+tracker2_announce="${TRACKER_ANNOUNCE_2}"
+tracker3_announce="${TRACKER_ANNOUNCE_3}"
+tracker4_announce="${TRACKER_ANNOUNCE_4}"
 
 # Source tag array - add more if required
 sources=( "$tracker1" "$tracker2" "$tracker3" "$tracker4" )
