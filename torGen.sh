@@ -21,8 +21,8 @@
 # Released under the MIT License
 
 # Variable list
-data="/torrents" # Torrent content parent folder
-torrents="/home/data/" # .torrent file destination
+data="${TORRENT_DATA_ROOT}" # Torrent content parent folder
+torrents="${TORRENT_FILE_ROOT}" # .torrent file destination
 tracker1="${TRACKER_ID_1}"
 tracker2="${TRACKER_ID_2}"
 tracker3="${TRACKER_ID_3}"
