@@ -24,7 +24,14 @@
 # Hard coded locations for torrent data and torrent file output - set variables or modify
 data="${CREATED_TORRENT_ROOT}"
 torrents="${DOCKERDIR}/qbittorrent/torrents/"
-tracker2="MAM"
+tracker1=""
+tracker2=""
+tracker3=""
+tracker4=""
+tracker1_announce=""
+tracker2_announce=""
+tracker3_announce=""
+tracker4_announce=""
 
 # Source tag array - add more if required
 sources=( "${TRACKER_ID_1}" "$tracker2" "${TRACKER_ID_3}" "${TRACKER_ID_4}" )
