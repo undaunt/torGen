@@ -8,7 +8,7 @@
 # labeled as 'data' and 'torrents' directly below this comment.
 #
 # Set environmental variable values (or replace directly with text) the source IDs and announce
-# URLs for each tracker. Source labels, such as "RED" or "MAM", are on the 'sources' line ( line XX )
+# URLs for each tracker. Source labels, such as "RED" or "MAM", are on the 'sources' line (line XX)
 # in addition to the 'Choose your tracker:' section (line xx). Announce URLs are only in
 # the 'Choose your tracker:' section.
 #
@@ -24,9 +24,10 @@
 # Hard coded locations for torrent data and torrent file output - set variables or modify
 data="${CREATED_TORRENT_ROOT}"
 torrents="${DOCKERDIR}/qbittorrent/torrents/"
+tracker2="MAM"
 
 # Source tag array - add more if required
-sources=( "${TRACKER_ID_1}" "${TRACKER_ID_2}" "${TRACKER_ID_3}" "${TRACKER_ID_4}" )
+sources=( "${TRACKER_ID_1}" "$tracker2" "${TRACKER_ID_3}" "${TRACKER_ID_4}" )
 
 # Choose source flag and associated announce URL - set variables or modify, add/remove as needed
 echo
@@ -64,7 +65,7 @@ echo
 cd "$data"
 
 # Print current subfolders of data path as menu choices
-printf "Select the torrent content\'s folder:\n"
+printf "Select the torrent content folder:\n"
 select d in */; do test -n "$d" && break; echo ">>> Invalid Folder Selection"; done
 
 # Set the full torrent content directory and output file location
