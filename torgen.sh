@@ -1,14 +1,34 @@
 #!/bin/bash
-# Create torrents for a specified tracker with mktorrent
+#
+# torGen.sh by undaunt
+#
+# Ensure wherever mktorrent is installed that it is in the PATH.
+#
+# Set environmental variables (or static paths) for the data and torrent file folders
+# labeled as 'data' and 'torrents' directly below this comment.
+#
+# Set environmental variable values (or replace directly with text) the source IDs and announce
+# URLs for each tracker. Source labels, such as "RED" or "MAM", are on the 'sources' line ( line XX )
+# in addition to the 'Choose your tracker:' section (line xx). Announce URLs are only in
+# the 'Choose your tracker:' section.
+#
+# The pieces size recommendations used below are based on suggested size values from
+# the REDacted.ch wiki.
+#
+# When executing the script you'll need to answer three questions:
+# 1 - Choose your tracker, 2 - Is it private, 3 - Where is the content for the torrent
+#
+# Released under the MIT License
 
-# Hard code locations for torrent data and torrent file output - customize as desired
+# Variable list
+# Hard coded locations for torrent data and torrent file output - set variables or modify
 data="${CREATED_TORRENT_ROOT}"
 torrents="${DOCKERDIR}/qbittorrent/torrents/"
 
 # Source tag array - add more if required
 sources=( "${TRACKER_ID_1}" "${TRACKER_ID_2}" "${TRACKER_ID_3}" "${TRACKER_ID_4}" )
 
-# Choose source flag and associated announce URL - add more if required
+# Choose source flag and associated announce URL - set variables or modify, add/remove as needed
 echo
 echo "Choose your tracker:"
 select source in "${sources[@]}"
@@ -44,7 +64,7 @@ echo
 cd "$data"
 
 # Print current subfolders of data path as menu choices
-printf "Select the data folder:\n"
+printf "Select the torrent content\'s folder:\n"
 select d in */; do test -n "$d" && break; echo ">>> Invalid Folder Selection"; done
 
 # Set the full torrent content directory and output file location
