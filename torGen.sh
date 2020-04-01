@@ -20,7 +20,8 @@
 # Variable list
 data="${TORRENT_DATA_ROOT}" # Torrent content parent folder
 torrents="${TORRENT_FILE_ROOT}" # .torrent file destination
-bin="/usr/local/bin/mktorrent"
+bin="/usr/local/bin/mktorrent" # mktorrent path
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # current directory
 tracker1="${TRACKER_ID_1}"
 tracker2="${TRACKER_ID_2}"
 tracker3="${TRACKER_ID_3}"
@@ -29,6 +30,12 @@ tracker1_announce="${TRACKER_ANNOUNCE_1}"
 tracker2_announce="${TRACKER_ANNOUNCE_2}"
 tracker3_announce="${TRACKER_ANNOUNCE_3}"
 tracker4_announce="${TRACKER_ANNOUNCE_4}"
+
+# Check for non-interactive mode
+if [[ $# -ge 3 ]];
+then
+  echo "noninteractive!!!"
+else
 
 # Source tag array - add more if required
 sources=( "$tracker1" "$tracker2" "$tracker3" "$tracker4" )
@@ -114,3 +121,5 @@ fi
 $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 echo
 echo Torrent file created at $file from $content.
+
+fi
