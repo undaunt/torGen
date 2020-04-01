@@ -2,27 +2,25 @@
 #
 # torGen.sh by undaunt
 #
-# Ensure wherever mktorrent is installed that it is in the PATH.
+# Set environmental variables (or full static paths) for the data and torrent file folders
+# labeled as 'data' and 'torrents' directly below this comment. (lines 23-24)
 #
-# Set environmental variables (or static paths) for the data and torrent file folders
-# labeled as 'data' and 'torrents' directly below this comment.
-#
-# Set environmental variable values (or replace directly with text) the source IDs and announce
-# URLs for each tracker. Source labels, such as "RED" or "MAM", are on the 'sources' line (line XX)
-# in addition to the 'Choose your tracker:' section (line xx). Announce URLs are only in
-# the 'Choose your tracker:' section.
+# Below that, set environmental variable values (or replace directly with text) the source
+# IDs and announce URLs for each tracker. Source label examples are "RED" or "MAM" while
+# announce URLs are longer, such as https://flacsfor.me/xxxxx/announce.
 #
 # The pieces size recommendations used below are based on suggested size values from
 # the REDacted.ch wiki.
 #
 # When executing the script you'll need to answer three questions:
-# 1 - Choose your tracker, 2 - Is it private, 3 - Where is the content for the torrent
+# 1 - Which tracker?, 2 - Is it private?, 3 - Where is the content for the torrent?
 #
 # Released under the MIT License
 
 # Variable list
 data="${TORRENT_DATA_ROOT}" # Torrent content parent folder
 torrents="${TORRENT_FILE_ROOT}" # .torrent file destination
+bin="/usr/local/bin/mktorrent"
 tracker1="${TRACKER_ID_1}"
 tracker2="${TRACKER_ID_2}"
 tracker3="${TRACKER_ID_3}"
@@ -107,6 +105,6 @@ elif [ "$size" -gt 2147 ]
 fi
 
 # Create the torrent file
-mktorrent -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
+echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 echo
 echo Torrent file created at $file from $content.
