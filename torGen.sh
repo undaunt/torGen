@@ -109,7 +109,7 @@ echo
 
 # Capture the size for torrent
 size1=$(du -sm "$d" | awk '{ print $1 }')
-size2=$( du -m -c "$source" | tail -1 | grep -Eo ^[0-9]+ )
+size2=$( du -m -c "$d" | tail -1 | grep -Eo ^[0-9]+ )
 
 echo $size1 $size2
 
