@@ -78,28 +78,28 @@ file="${torrents%/}"/"${d%/}".torrent
 echo
 
 # Capture the size for torrent
-size=$(du -shm "$d" | awk '{ print $1 }')
+size=$(du -sm "$d" | awk '{ print $1 }')
 
 # Set the piece size based on content size
-if [ "$size" -le 52 ]
+if [ "$size" -le 50 ]
 then
   piece=15
-elif [ "$size" -gt 52 ] && [ "$size" -le 157 ]
+elif [ "$size" -gt 50 ] && [ "$size" -le 150 ]
   then
     piece=16
-elif [ "$size" -gt 157 ] && [ "$size" -le 367 ]
+elif [ "$size" -gt 150 ] && [ "$size" -le 350 ]
   then
     piece=17
-elif [ "$size" -gt 367 ] && [ "$size" -le 537 ]
+elif [ "$size" -gt 350 ] && [ "$size" -le 512 ]
   then
     piece=18
-elif [ "$size" -gt 537 ] && [ "$size" -le 1073 ]
+elif [ "$size" -gt 512 ] && [ "$size" -le 1024 ]
   then
     piece=19
-elif [ "$size" -gt 1073 ] && [ "$size" -le 2147 ]
+elif [ "$size" -gt 1024 ] && [ "$size" -le 2048 ]
   then
     piece=20
-elif [ "$size" -gt 2147 ]
+elif [ "$size" -gt 2048 ]
   then
     piece=21
 fi
