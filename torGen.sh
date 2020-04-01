@@ -31,12 +31,20 @@ tracker2_announce="${TRACKER_ANNOUNCE_2}"
 tracker3_announce="${TRACKER_ANNOUNCE_3}"
 tracker4_announce="${TRACKER_ANNOUNCE_4}"
 
-# Check for non-interactive mode
+# Check for level of interactivity - Set tracker source and announce
 if [[ $# -ge 3 ]];
 then
-  echo "noninteractive!!!"
-else
+  source=$3
 
+  if [[ $source == $tracker1 ]]; then
+    announce="tracker1_announce"
+  elif [[ $source == $tracker2 ]]; then
+    announce="tracker2_announce"
+  elif [[ $source == $tracker3 ]]; then
+    announce="tracker3_announce"
+  elif [[ $source == $tracker4 ]]; then
+    announce="tracker4_announce"
+else
 # Source tag array - add more if required
 sources=( "$tracker1" "$tracker2" "$tracker3" "$tracker4" )
 
@@ -57,9 +65,10 @@ do
   esac
   break
 done
-echo
+fi
 
 # Set the private flag
+echo
 echo "Is this a private tracker?"
 select private in "yes" "no"
 do
@@ -121,5 +130,3 @@ fi
 $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 echo
 echo Torrent file created at $file from $content.
-
-fi
