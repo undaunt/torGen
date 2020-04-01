@@ -44,6 +44,7 @@ then
     announce="tracker3_announce"
   elif [[ $source == $tracker4 ]]; then
     announce="tracker4_announce"
+  fi
 else
 # Source tag array - add more if required
 sources=( "$tracker1" "$tracker2" "$tracker3" "$tracker4" )
