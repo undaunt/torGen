@@ -31,10 +31,14 @@ tracker2_announce="${TRACKER_ANNOUNCE_2}"
 tracker3_announce="${TRACKER_ANNOUNCE_3}"
 tracker4_announce="${TRACKER_ANNOUNCE_4}"
 
-# Check for level of interactivity - Set tracker source and announce
-if [[ $# -ge 3 ]];
+# Check for level of interactivity
+if [[ $# -ge 4 ]];
 then
+  echo Non-interactive mode executing.
+  content=$1
+  file=$2
   source=$3
+  private=$4
 
   if [[ $source == $tracker1 ]]; then
     announce="tracker1_announce"
@@ -45,6 +49,13 @@ then
   elif [[ $source == $tracker4 ]]; then
     announce="tracker4_announce"
   fi
+
+  if [[ $private == "true" ]]; then
+    flag="-p"
+  else
+    flag=""
+  fi
+
 else
 # Source tag array - add more if required
 sources=( "$tracker1" "$tracker2" "$tracker3" "$tracker4" )
@@ -68,15 +79,17 @@ do
 done
 fi
 
+if [[ $# -ge 3 ]];
+then
 # Set the private flag
 echo
 echo "Is this a private tracker?"
 select private in "yes" "no"
 do
   case "$private" in
-    yes) flag="-p"
+    true) flag="-p"
          ;;
-    no)  flag=""
+    false)  flag=""
          ;;  
   esac
   break
@@ -95,35 +108,30 @@ file="${torrents%/}"/"${d%/}".torrent
 echo
 
 # Capture the size for torrent
-size=$(du -sm "$d" | awk '{ print $1 }')
+size1=$(du -sm "$d" | awk '{ print $1 }')
+size2=$( du -m -c "$source" | tail -1 | grep -Eo ^[0-9]+ )
+
+echo $size1 $size2
 
 # Set the piece size based on content size
 if [ "$size" -le 69 ]
 then
   piece=15
-elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]
-  then
+elif [ "$size" -ge 63 ] && [ "$size" -le 137 ] then
     piece=16
-elif [ "$size" -ge 125 ] && [ "$size" -le 275 ]
-  then
+elif [ "$size" -ge 125 ] && [ "$size" -le 275 ] then
     piece=17
-elif [ "$size" -ge 250 ] && [ "$size" -le 550 ]
-  then
+elif [ "$size" -ge 250 ] && [ "$size" -le 550 ] then
     piece=18
-elif [ "$size" -ge 500 ] && [ "$size" -le 1100 ]
-  then
+elif [ "$size" -ge 500 ] && [ "$size" -le 1100 ] then
     piece=19
-elif [ "$size" -ge 1000 ] && [ "$size" -le 2200 ]
-  then
+elif [ "$size" -ge 1000 ] && [ "$size" -le 2200 ] then
     piece=20
-elif [ "$size" -ge 1950 ] && [ "$size" -le 4300 ]
-  then
+elif [ "$size" -ge 1950 ] && [ "$size" -le 4300 ] then
     piece=21
-elif [ "$size" -ge 3900 ] && [ "$size" -le 8590 ]
-  then
+elif [ "$size" -ge 3900 ] && [ "$size" -le 8590 ] then
     piece=22
-elif [ "$size" -ge 7810 ]
-  then
+elif [ "$size" -ge 7810 ] then
     piece=23
 fi
 
