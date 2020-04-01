@@ -79,8 +79,8 @@ do
 done
 fi
 
-if [[ $# -ge 3 ]];
-then
+#if [[ $# -ge 3 ]];
+#then
 # Set the private flag
 echo
 echo "Is this a private tracker?"
