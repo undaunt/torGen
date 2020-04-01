@@ -10,7 +10,7 @@
 # announce URLs are longer, such as https://flacsfor.me/xxxxx/announce.
 #
 # The pieces size recommendations used below are based on suggested size values from
-# the REDacted.ch wiki.
+# the MyAnonamouse wiki in lieu of REDacted.ch guidance.
 #
 # When executing the script you'll need to answer three questions:
 # 1 - Which tracker?, 2 - Is it private?, 3 - Where is the content for the torrent?
@@ -81,27 +81,33 @@ echo
 size=$(du -sm "$d" | awk '{ print $1 }')
 
 # Set the piece size based on content size
-if [ "$size" -le 50 ]
+if [ "$size" -le 69 ]
 then
   piece=15
-elif [ "$size" -gt 50 ] && [ "$size" -le 150 ]
+elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]
   then
     piece=16
-elif [ "$size" -gt 150 ] && [ "$size" -le 350 ]
+elif [ "$size" -ge 125 ] && [ "$size" -le 275 ]
   then
     piece=17
-elif [ "$size" -gt 350 ] && [ "$size" -le 512 ]
+elif [ "$size" -ge 250 ] && [ "$size" -le 550 ]
   then
     piece=18
-elif [ "$size" -gt 512 ] && [ "$size" -le 1024 ]
+elif [ "$size" -ge 500 ] && [ "$size" -le 1100 ]
   then
     piece=19
-elif [ "$size" -gt 1024 ] && [ "$size" -le 2048 ]
+elif [ "$size" -ge 1000 ] && [ "$size" -le 2200 ]
   then
     piece=20
-elif [ "$size" -gt 2048 ]
+elif [ "$size" -ge 1950 ] && [ "$size" -le 4300 ]
   then
     piece=21
+elif [ "$size" -ge 3900 ] && [ "$size" -le 8590 ]
+  then
+    piece=22
+elif [ "$size" -ge 7810 ]
+  then
+    piece=23
 fi
 
 # Create the torrent file
