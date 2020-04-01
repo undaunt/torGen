@@ -105,6 +105,6 @@ elif [ "$size" -gt 2147 ]
 fi
 
 # Create the torrent file
-echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
+$bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 echo
 echo Torrent file created at $file from $content.
