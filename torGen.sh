@@ -31,7 +31,7 @@ tracker3_announce="${TRACKER_ANNOUNCE_3}"
 tracker4_announce="${TRACKER_ANNOUNCE_4}"
 
 # Check for level of interactivity
-if [[ $# -ge 4 ]];
+if [[ $# -ge 3 ]];
   then
     echo Non-interactive mode executing.
     content=$1
@@ -41,27 +41,34 @@ if [[ $# -ge 4 ]];
 
     if [[ $source == "$tracker1" ]]; then
       announce="$tracker1_announce"
+      echo Tracker source is "$source" and announce is "$announce".
     elif [[ $source == "$tracker2" ]]; then
       announce="$tracker2_announce"
+      echo Tracker source is "$source" and announce is "$announce".
     elif [[ $source == "$tracker3" ]]; then
       announce="$tracker3_announce"
+      echo Tracker source is "$source" and announce is "$announce".
     elif [[ $source == "$tracker4" ]]; then
       announce="$tracker4_announce"
+      echo Tracker source is "$source" and announce is "$announce".
     else
       echo "No matching tracker! Exiting.."
       exit 1
     fi
 
-    if [[ $private == "true" ]]; then
+    if [[ $private == "true" ]] || [[ $private -z ]]; then
       flag="-p"
-      echo Private flag set.
-    else
+      echo Torrent marked as private.
+    elif [[ $private == "false" ]]; then
       flag=""
+      echo Torrent marked as public.
+    else
+      echo Invalid private flag. Use false for public, and true \(or leave blank\) for private.
+      exit 1
     fi
 
-    if [[ -e "$source" || -d "$source" ]]; then
+    if [[ -e "$content" || -d "$content" ]]; then
       size=$( du -m -c "$source" | tail -1 | grep -Eo "^[0-9]+" )
-      # Set the piece size based on content size
       if [ "$size" -le 69 ]; then
         piece=15
       elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]; then
