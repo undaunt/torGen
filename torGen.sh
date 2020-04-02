@@ -136,36 +136,35 @@ else
 
   # Print current subfolders of data path as menu choices
   printf "Select the torrent content folder:\n"
-  select d in */; do test -n "$d" && break; echo ">>> Invalid Folder Selection"; done
+  select content in */; do test -n "$content" && break; echo ">>> Invalid Folder Selection"; done
 
   # Set the full torrent content directory and output file location
-  content="$PWD"/"${d%/}"
+  content="$PWD"/"${content%/}"
   file="${torrents%/}"/"${d%/}".torrent
   echo
 
   # Capture the size for torrent
-  #size=$(du -sm "$d" | awk '{ print $1 }')
-  size=$( du -m -c "$d" | tail -1 | grep -Eo "^[0-9]+" )
-
-  # Set the piece size based on content size
-  if [ "$size" -le 69 ]; then
-    piece=15
-  elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]; then
-    piece=16
-  elif [ "$size" -ge 125 ] && [ "$size" -le 275 ]; then
-    piece=17
-  elif [ "$size" -ge 250 ] && [ "$size" -le 550 ]; then
-    piece=18
-  elif [ "$size" -ge 500 ] && [ "$size" -le 1100 ]; then
-    piece=19
-  elif [ "$size" -ge 1000 ] && [ "$size" -le 2200 ]; then
-    piece=20
-  elif [ "$size" -ge 1950 ] && [ "$size" -le 4300 ]; then
-    piece=21
-  elif [ "$size" -ge 3900 ] && [ "$size" -le 8590 ]; then
-    piece=22
-  elif [ "$size" -ge 7810 ]; then
-    piece=23
+  if [[ -e "$d" || -d "$d" ]]; then
+    #size=$(du -sm "$d" | awk '{ print $1 }')
+    size=$( du -m -c "$d" | tail -1 | grep -Eo "^[0-9]+" )
+    if [ "$size" -le 69 ]; then
+      piece=15
+    elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]; then
+      piece=16
+    elif [ "$size" -ge 125 ] && [ "$size" -le 275 ]; then
+      piece=17
+    elif [ "$size" -ge 250 ] && [ "$size" -le 550 ]; then
+      piece=18
+    elif [ "$size" -ge 500 ] && [ "$size" -le 1100 ]; then
+      piece=19
+    elif [ "$size" -ge 1000 ] && [ "$size" -le 2200 ]; then
+      piece=20
+    elif [ "$size" -ge 1950 ] && [ "$size" -le 4300 ]; then
+      piece=21
+    elif [ "$size" -ge 3900 ] && [ "$size" -le 8590 ]; then
+      piece=22
+    elif [ "$size" -ge 7810 ]; then
+      piece=23
   fi
 
   # Check if torrent already exists, then create the torrent file
