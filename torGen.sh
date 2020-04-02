@@ -56,7 +56,7 @@ if [[ $# -ge 3 ]];
       exit 1
     fi
 
-    if [[ $private == "true" ]] || [[ $private -z ]]; then
+    if [[ $private == "true" ]] || [[ -z $private ]]; then
       flag="-p"
       echo Torrent marked as private.
     elif [[ $private == "false" ]]; then
