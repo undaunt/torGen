@@ -47,6 +47,9 @@ if [[ $# -ge 4 ]];
       announce="tracker3_announce"
     elif [[ $source == $tracker4 ]]; then
       announce="tracker4_announce"
+    else
+      echo "No matching tracker! Exiting.."
+      exit 1
     fi
 
     if [[ $private == "true" ]]; then
@@ -76,7 +79,7 @@ if [[ $# -ge 4 ]];
         piece=22
       elif [ "$size" -ge 7810 ]; then
         piece=23
-      fi
+    fi
 
     echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
     echo
