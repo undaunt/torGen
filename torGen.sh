@@ -68,7 +68,7 @@ if [[ $# -ge 3 ]];
     fi
 
     if [[ -e "$content" || -d "$content" ]]; then
-      size=$( du -m -c "$source" | tail -1 | grep -Eo "^[0-9]+" )
+      size=$( du -m -c "$content" | tail -1 | grep -Eo "^[0-9]+" )
       if [ "$size" -le 69 ]; then
         piece=15
       elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]; then
