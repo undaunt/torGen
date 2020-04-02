@@ -29,7 +29,7 @@ tracker1_announce="${TRACKER_ANNOUNCE_1}"
 tracker2_announce="${TRACKER_ANNOUNCE_2}"
 tracker3_announce="${TRACKER_ANNOUNCE_3}"
 tracker4_announce="${TRACKER_ANNOUNCE_4}"
-
+set -x
 # Check for level of interactivity
 if [[ $# -ge 3 ]];
   then
@@ -140,13 +140,13 @@ else
 
   # Set the full torrent content directory and output file location
   content="$PWD"/"${content%/}"
-  file="${torrents%/}"/"${d%/}".torrent
+  file="${torrents%/}"/"${content%/}".torrent
   echo
 
   # Capture the size for torrent
-  if [[ -e "$d" || -d "$d" ]]; then
+  if [[ -e "$content" || -d "$content" ]]; then
     #size=$(du -sm "$d" | awk '{ print $1 }')
-    size=$( du -m -c "$d" | tail -1 | grep -Eo "^[0-9]+" )
+    size=$( du -m -c "$content" | tail -1 | grep -Eo "^[0-9]+" )
     if [ "$size" -le 69 ]; then
       piece=15
     elif [ "$size" -ge 63 ] && [ "$size" -le 137 ]; then
@@ -165,6 +165,7 @@ else
       piece=22
     elif [ "$size" -ge 7810 ]; then
       piece=23
+    fi
   fi
 
   # Check if torrent already exists, then create the torrent file
