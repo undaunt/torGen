@@ -78,7 +78,6 @@ if [[ -e "$source" || -d "$source" ]]; then
   elif [ "$size" -ge 7810 ]; then
       piece=23
   fi
-fi
 
   echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 
@@ -103,7 +102,6 @@ do
   esac
   break
 done
-fi
 
 # Set the private flag
 echo
@@ -160,3 +158,5 @@ fi
 echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 echo
 echo Torrent file created at $file from $content.
+
+fi
