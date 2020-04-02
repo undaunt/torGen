@@ -79,6 +79,7 @@ if [[ -e "$source" || -d "$source" ]]; then
   elif [ "$size" -ge 7810 ]; then
       piece=23
   fi
+fi
 
   echo "$execute"
 
