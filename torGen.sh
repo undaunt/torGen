@@ -22,7 +22,6 @@ data="${TORRENT_DATA_ROOT}" # Torrent content root folder - for interactive mode
 torrents="${TORRENT_FILE_ROOT}" # .torrent file destination - for interactive mode only
 bin="/usr/local/bin/mktorrent" # mktorrent path
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # current directory
-execute="$( $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file" )"
 tracker1="${TRACKER_ID_1}"
 tracker2="${TRACKER_ID_2}"
 tracker3="${TRACKER_ID_3}"
@@ -81,7 +80,7 @@ if [[ -e "$source" || -d "$source" ]]; then
   fi
 fi
 
-  echo "$execute"
+  echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 
 else
 # Source tag array - add more if required
@@ -158,6 +157,6 @@ elif [ "$size" -ge 7810 ]; then
 fi
 
 # Check if torrent already exists, then create the torrent file
-echo "$execute"
+echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
 echo
 echo Torrent file created at $file from $content.
