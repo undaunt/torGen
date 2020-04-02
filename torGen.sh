@@ -79,6 +79,9 @@ if [[ $# -ge 4 ]];
       fi
 
     echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
+    echo
+    echo Torrent file created at $file from $content.
+
   fi
 
 else
