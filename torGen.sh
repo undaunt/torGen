@@ -40,13 +40,13 @@ if [[ $# -ge 4 ]];
     private=$4
 
     if [[ $source == "$tracker1" ]]; then
-      announce="tracker1_announce"
+      announce="$tracker1_announce"
     elif [[ $source == "$tracker2" ]]; then
-      announce="tracker2_announce"
+      announce="$tracker2_announce"
     elif [[ $source == "$tracker3" ]]; then
-      announce="tracker3_announce"
+      announce="$tracker3_announce"
     elif [[ $source == "$tracker4" ]]; then
-      announce="tracker4_announce"
+      announce="$tracker4_announce"
     else
       echo "No matching tracker! Exiting.."
       exit 1
@@ -57,7 +57,6 @@ if [[ $# -ge 4 ]];
       echo Private flag set.
     else
       flag=""
-      echo Private flag not set.
     fi
 
     if [[ -e "$source" || -d "$source" ]]; then
