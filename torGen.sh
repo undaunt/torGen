@@ -80,7 +80,7 @@ if [[ -e "$source" || -d "$source" ]]; then
       piece=23
   fi
 
-  echo execute
+  echo "$execute"
 
 else
 # Source tag array - add more if required
@@ -157,6 +157,6 @@ elif [ "$size" -ge 7810 ]; then
 fi
 
 # Check if torrent already exists, then create the torrent file
-echo $execute
+echo "$execute"
 echo
 echo Torrent file created at $file from $content.
