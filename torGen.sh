@@ -18,7 +18,7 @@
 # Released under the MIT License
 
 # Variable list
-data="${TORRENT_DATA_ROOT}" # Torrent content root folder - for interactive mode only
+data="${TORRENT_DATA_ROOT}" # Torrent root content folder - for interactive mode only
 torrents="${TORRENT_FILE_ROOT}" # .torrent file destination - for interactive mode only
 bin="/usr/local/bin/mktorrent" # mktorrent path
 tracker1="${TRACKER_ID_1}"
@@ -39,13 +39,13 @@ if [[ $# -ge 4 ]];
     source=$3
     private=$4
 
-    if [[ $source == $tracker1 ]]; then
+    if [[ $source == "$tracker1" ]]; then
       announce="tracker1_announce"
-    elif [[ $source == $tracker2 ]]; then
+    elif [[ $source == "$tracker2" ]]; then
       announce="tracker2_announce"
-    elif [[ $source == $tracker3 ]]; then
+    elif [[ $source == "$tracker3" ]]; then
       announce="tracker3_announce"
-    elif [[ $source == $tracker4 ]]; then
+    elif [[ $source == "$tracker4" ]]; then
       announce="tracker4_announce"
     else
       echo "No matching tracker! Exiting.."
@@ -54,12 +54,14 @@ if [[ $# -ge 4 ]];
 
     if [[ $private == "true" ]]; then
       flag="-p"
+      echo Private flag set.
     else
       flag=""
+      echo Private flag not set.
     fi
 
     if [[ -e "$source" || -d "$source" ]]; then
-      size=$( du -m -c "$source" | tail -1 | grep -Eo ^[0-9]+ )
+      size=$( du -m -c "$source" | tail -1 | grep -Eo "^[0-9]+" )
       # Set the piece size based on content size
       if [ "$size" -le 69 ]; then
         piece=15
@@ -81,9 +83,9 @@ if [[ $# -ge 4 ]];
         piece=23
     fi
 
-    echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
+    echo $bin -l $piece "$flag" -s "$source" -a "$announce" "$content" -o "$file"
     echo
-    echo Torrent file created at $file from $content.
+    echo Torrent file created at "$file" from "$content".
 
   fi
 
@@ -124,7 +126,7 @@ else
   done
   echo
 
-  cd "$data"
+  cd "$data" || ( exit && echo Invalid root content folder. )
 
   # Print current subfolders of data path as menu choices
   printf "Select the torrent content folder:\n"
@@ -137,7 +139,7 @@ else
 
   # Capture the size for torrent
   #size=$(du -sm "$d" | awk '{ print $1 }')
-  size=$( du -m -c "$d" | tail -1 | grep -Eo ^[0-9]+ )
+  size=$( du -m -c "$d" | tail -1 | grep -Eo "^[0-9]+" )
 
   # Set the piece size based on content size
   if [ "$size" -le 69 ]; then
@@ -161,8 +163,8 @@ else
   fi
 
   # Check if torrent already exists, then create the torrent file
-  echo $bin -l $piece $flag -s $source -a "$announce" "$content" -o "$file"
+  echo $bin -l $piece "$flag" -s "$source" -a "$announce" "$content" -o "$file"
   echo
-  echo Torrent file created at $file from $content.
+  echo Torrent file created at "$file" from "$content".
 
 fi
